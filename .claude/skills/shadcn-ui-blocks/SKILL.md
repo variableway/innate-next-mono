@@ -143,6 +143,52 @@ import { LoginForm } from "@innate/ui"
 />
 ```
 
+### Mail Blocks (`@innate/ui/block/mail`)
+
+3-panel resizable inbox layout with sidebar, mail list, and email detail view:
+
+```tsx
+import { Inbox } from "@innate/ui"
+import type { MailItem } from "@innate/ui"
+
+const mails: MailItem[] = [
+  {
+    id: "1", name: "William Smith", email: "will@example.com",
+    subject: "Meeting Tomorrow", text: "Hi, let's have a meeting...",
+    date: "2024-01-15T09:00:00", read: true, labels: ["work", "important"],
+  },
+]
+
+<Inbox mails={mails} />
+```
+
+Individual components also available:
+- `MailList` - Scrollable email list with badges, read status, labels
+- `MailDisplay` - Email detail with reply composer, archive/delete actions, snooze
+
+### Chat Blocks (`@innate/ui/block/chat`)
+
+Full chat interface with conversation sidebar, message list, and input:
+
+```tsx
+import { ChatInterface } from "@innate/ui"
+import type { ChatConversation, ChatMessage, ChatUser } from "@innate/ui"
+
+<ChatInterface
+  conversations={conversations}
+  users={users}
+  messages={messages}
+  currentUserId="user-1"
+  activeConversationId="conv-1"
+  onSendMessage={(content) => { /* send */ }}
+  onSelectConversation={(id) => { /* switch */ }}
+/>
+```
+
+Individual components:
+- `MessageList` - Chat messages with reactions, date grouping, avatars, auto-scroll
+- Chat types: `ChatUser`, `ChatMessage`, `ChatConversation`
+
 ## Creating a New Next.js + shadcn/ui Project
 
 When the user asks to create a new project, follow these steps:
@@ -269,6 +315,16 @@ Sidebar (collapsible) → Header (sticky) → Content (cards + tables + charts)
 ### Auth Pattern
 ```
 Centered Card → Logo → Form (Zod validated) → Social OAuth → Links
+```
+
+### Mail/Inbox Pattern
+```
+Resizable 3-Panel: [Folders sidebar] | [Mail list + search] | [Email detail + reply composer]
+```
+
+### Chat Pattern
+```
+Resizable 2-Panel: [Conversation list] | [Message list + reactions + input]
 ```
 
 ## Key Dependencies

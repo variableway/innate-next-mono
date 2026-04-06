@@ -57,4 +57,6 @@ export * from "./components/ui/tooltip";
 export * from "./components/ui/use-mobile";
 export * from "./components/ui/use-toast"
 export * from "./block/landing"
-export * from "./block/auth";
+export * from "./block/auth"
+export * from "./block/mail"
+export * from "./block/chat"
