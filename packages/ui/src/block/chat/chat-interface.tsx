@@ -60,7 +60,7 @@ function ChatInterface({
         className
       )}
     >
-      <ResizablePanelGroup direction="horizontal">
+      <ResizablePanelGroup orientation="horizontal">
         {/* Conversation list */}
         <ResizablePanel defaultSize={25} minSize={20} maxSize={35}>
           <div className="flex h-[52px] items-center px-4">

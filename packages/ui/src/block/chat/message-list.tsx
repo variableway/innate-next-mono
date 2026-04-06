@@ -107,12 +107,12 @@ function MessageList({
                 const showAvatar =
                   !isOwn &&
                   (idx === 0 ||
-                    group[idx - 1]?.senderId !== msg.senderId)
+                    group.messages[idx - 1]?.senderId !== msg.senderId)
                 const showName =
                   !isOwn &&
                   (idx === 0 ||
-                    group[idx - 1]?.senderId !== msg.senderId)
-                const consecutive = isConsecutive(msg, idx, group)
+                    group.messages[idx - 1]?.senderId !== msg.senderId)
+                const consecutive = isConsecutive(msg, idx, group.messages)
 
                 return (
                   <div

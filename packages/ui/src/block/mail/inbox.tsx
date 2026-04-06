@@ -4,7 +4,7 @@ import * as React from "react"
 import {
   Archive,
   File,
-  Inbox,
+  Inbox as InboxIcon,
   Send,
   Trash2,
 } from "lucide-react"
@@ -30,7 +30,7 @@ import { MailDisplay } from "./mail-display"
 import type { MailItem, MailFolder } from "./mail-types"
 
 const defaultFolders: MailFolder[] = [
-  { title: "Inbox", label: "128", icon: Inbox, variant: "default" },
+  { title: "Inbox", label: "128", icon: InboxIcon, variant: "default" },
   { title: "Drafts", label: "9", icon: File, variant: "ghost" },
   { title: "Sent", icon: Send, variant: "ghost" },
   { title: "Trash", icon: Trash2, variant: "ghost" },
@@ -60,7 +60,7 @@ function Inbox({
   return (
     <TooltipProvider delayDuration={0}>
       <ResizablePanelGroup
-        direction="horizontal"
+        orientation="horizontal"
         className={cn(
           "h-full items-stretch rounded-lg border overflow-hidden",
           className
@@ -73,8 +73,7 @@ function Inbox({
           collapsible
           minSize={15}
           maxSize={20}
-          onCollapse={() => setCollapsed(true)}
-          onExpand={() => setCollapsed(false)}
+          onResize={(size) => setCollapsed(size.asPercentage <= navCollapsedSize)}
           className={cn(
             collapsed && "w-full transition-all duration-300 ease-in-out"
           )}
