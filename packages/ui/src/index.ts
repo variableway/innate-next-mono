@@ -55,4 +55,6 @@ export * from "./components/ui/toggle-group";
 export * from "./components/ui/toggle";
 export * from "./components/ui/tooltip";
 export * from "./components/ui/use-mobile";
-export * from "./components/ui/use-toast";
+export * from "./components/ui/use-toast"
+export * from "./block/landing"
+export * from "./block/auth";

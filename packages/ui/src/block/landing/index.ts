@@ -1,0 +1,7 @@
+export { HeroSection, type HeroSectionProps } from "./hero"
+export { FeaturesSection, type FeaturesSectionProps, type Feature } from "./features"
+export { PricingSection, type PricingSectionProps, type PricingPlan } from "./pricing"
+export { TestimonialsSection, type TestimonialsSectionProps, type Testimonial } from "./testimonials"
+export { FaqSection, type FaqSectionProps, type FaqItem } from "./faq"
+export { StatsSection, type StatsSectionProps, type Stat } from "./stats"
+export { CTASection, type CTASectionProps } from "./cta"
