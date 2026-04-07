@@ -3,6 +3,7 @@
 import { use, useState } from "react"
 import Link from "next/link"
 import { getComponentBySlug } from "@/lib/registry"
+import { ComponentPreview } from "@/lib/component-preview"
 import { Badge } from "@innate/ui"
 import { Button } from "@innate/ui"
 import {
@@ -108,11 +109,7 @@ export default function ComponentDetailPage({
           <TabsContent value="preview">
             <Card>
               <CardContent className="p-6">
-                <div className="flex min-h-[200px] items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/20 bg-muted/30">
-                  <p className="text-sm text-muted-foreground">
-                    Component preview placeholder
-                  </p>
-                </div>
+                <ComponentPreview slug={comp.slug} />
               </CardContent>
             </Card>
           </TabsContent>

@@ -3,6 +3,7 @@
 import { useMemo, useState, useCallback } from "react"
 import Link from "next/link"
 import { componentRegistry, type ComponentMeta } from "@/lib/registry"
+import { ComponentPreview } from "@/lib/component-preview"
 import {
   generateTask,
   pageTemplates,
@@ -254,6 +255,9 @@ export default function TaskBuilderPage() {
                         <CardDescription className="mb-3">
                           {comp.description}
                         </CardDescription>
+                        <div className="mb-3">
+                          <ComponentPreview slug={comp.slug} compact />
+                        </div>
                         <div className="flex items-center gap-1">
                           <Button
                             variant="outline"

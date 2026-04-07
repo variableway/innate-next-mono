@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter @innate/web dev",
+    "dev": "pnpm --filter @innate/layout-composer dev",
     "run:project": "bash run.sh",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
