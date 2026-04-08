@@ -4,6 +4,7 @@ import { useMemo, useState, useCallback } from "react"
 import Link from "next/link"
 import { componentRegistry, type ComponentMeta } from "@/lib/registry"
 import { ComponentPreview } from "@/lib/component-preview"
+import { useAIDrawerStore } from "@/lib/ai-drawer-store"
 import {
   generateTask,
   pageTemplates,
@@ -26,6 +27,7 @@ export default function TaskBuilderPage() {
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([])
   const [search, setSearch] = useState("")
   const [copied, setCopied] = useState(false)
+  const openForTask = useAIDrawerStore((s) => s.openForTask)
 
   // ── Derived data ───────────────────────────────────────────
 
@@ -300,6 +302,14 @@ export default function TaskBuilderPage() {
           <div className="flex items-center justify-between border-b px-4 py-3">
             <h2 className="text-sm font-semibold">Generated Task</h2>
             <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={!task.fullText}
+                onClick={() => openForTask(selectedSlugs)}
+              >
+                AI Drawer
+              </Button>
               <Button
                 variant="outline"
                 size="sm"

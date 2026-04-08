@@ -9,3 +9,4 @@
 - if you want to extrace some ui components from templates folder, please do it
 - I like the shadcn-ui components, please extract them into my project in packages/ui folder, if it works,it could be named as block folder in the packages/ui folder
 - other projects are same, you can extract them into block folder in the packages/ui folder
+

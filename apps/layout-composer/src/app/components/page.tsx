@@ -1,8 +1,9 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { componentRegistry, getSubcategories } from "@/lib/registry"
+import { ComponentPreview } from "@/lib/component-preview"
 import { Badge } from "@innate/ui"
 import { Button } from "@innate/ui"
 import {
@@ -31,6 +32,9 @@ const subcategoryLabels: Record<string, string> = {
 
 export default function ComponentsPage() {
   const [search, setSearch] = useState("")
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
   const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null)
 
   const subcategories = useMemo(() => getSubcategories(), [])
@@ -183,7 +187,14 @@ export default function ComponentsPage() {
                           href={`/components/${comp.slug}`}
                           className="group"
                         >
-                          <Card className="h-full transition-shadow group-hover:shadow-md">
+                          <Card className="h-full transition-shadow group-hover:shadow-md overflow-hidden">
+                            <div className="border-b bg-muted/30 p-3 min-h-[60px] flex items-center justify-center overflow-hidden">
+                              {mounted ? (
+                                <ComponentPreview slug={comp.slug} compact />
+                              ) : (
+                                <p className="text-xs text-muted-foreground">Loading...</p>
+                              )}
+                            </div>
                             <CardHeader className="pb-2">
                               <div className="flex items-center gap-2">
                                 <CardTitle className="text-base">

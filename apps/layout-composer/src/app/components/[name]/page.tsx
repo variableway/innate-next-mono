@@ -4,8 +4,10 @@ import { use, useState } from "react"
 import Link from "next/link"
 import { getComponentBySlug } from "@/lib/registry"
 import { ComponentPreview } from "@/lib/component-preview"
+import { useAIDrawerStore } from "@/lib/ai-drawer-store"
 import { Badge } from "@innate/ui"
 import { Button } from "@innate/ui"
+import { Sparkles } from "lucide-react"
 import {
   Card,
   CardContent,
@@ -23,6 +25,7 @@ export default function ComponentDetailPage({
   const { name } = use(params)
   const comp = getComponentBySlug(name)
   const [copiedField, setCopiedField] = useState<string | null>(null)
+  const openForComponent = useAIDrawerStore((s) => s.openForComponent)
 
   if (!comp) {
     return (
@@ -73,6 +76,15 @@ export default function ComponentDetailPage({
           <p className="mt-2 text-lg text-muted-foreground">
             {comp.description}
           </p>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-4 gap-1.5"
+            onClick={() => openForComponent(comp.slug)}
+          >
+            <Sparkles className="size-4" />
+            AI Task Description
+          </Button>
         </div>
 
         {/* Import code with copy */}
@@ -150,32 +162,6 @@ export default function ComponentDetailPage({
             </Card>
           </TabsContent>
         </Tabs>
-
-        {/* AI Task Description */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              AI Task Description
-              <Badge variant="secondary">AI-ready</Badge>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="rounded-lg bg-muted p-4">
-              <p className="text-sm leading-relaxed">{comp.taskDescription}</p>
-            </div>
-            <div className="mt-3 flex justify-end">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() =>
-                  copyToClipboard(comp.taskDescription, "taskDesc")
-                }
-              >
-                {copiedField === "taskDesc" ? "Copied!" : "Copy Description"}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   )
