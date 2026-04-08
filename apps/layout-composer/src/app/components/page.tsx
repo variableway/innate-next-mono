@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { componentRegistry, getSubcategories } from "@/lib/registry"
 import { ComponentPreview } from "@/lib/component-preview"
 import { Badge } from "@innate/ui"
@@ -31,6 +32,7 @@ const subcategoryLabels: Record<string, string> = {
 }
 
 export default function ComponentsPage() {
+  const router = useRouter()
   const [search, setSearch] = useState("")
   const [mounted, setMounted] = useState(false)
 
@@ -182,10 +184,10 @@ export default function ComponentsPage() {
                     </h3>
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                       {comps.map((comp) => (
-                        <Link
+                        <div
                           key={comp.slug}
-                          href={`/components/${comp.slug}`}
-                          className="group"
+                          className="group cursor-pointer"
+                          onClick={() => router.push(`/components/${comp.slug}`)}
                         >
                           <Card className="h-full transition-shadow group-hover:shadow-md overflow-hidden">
                             <div className="border-b bg-muted/30 p-3 min-h-[60px] flex items-center justify-center overflow-hidden">
@@ -211,7 +213,7 @@ export default function ComponentsPage() {
                               </CardDescription>
                             </CardContent>
                           </Card>
-                        </Link>
+                        </div>
                       ))}
                     </div>
                   </div>

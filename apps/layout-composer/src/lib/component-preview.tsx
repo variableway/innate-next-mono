@@ -1209,8 +1209,8 @@ function InboxPreview({ compact }: { compact: boolean }) {
     { title: "Drafts", icon: Mail },
   ]
   const mails: MailItem[] = [
-    { id: "1", name: "Alice", email: "alice@example.com", subject: "Meeting Tomorrow", text: "Hey, are we still on for tomorrow?", date: "10:30 AM", read: false, labels: ["work"] },
-    { id: "2", name: "Bob", email: "bob@example.com", subject: "Project Update", text: "The latest changes have been pushed.", date: "9:15 AM", read: true, labels: [] },
+    { id: "1", name: "Alice", email: "alice@example.com", subject: "Meeting Tomorrow", text: "Hey, are we still on for tomorrow?", date: "2026-04-09T09:30:00.000Z", read: false, labels: ["work"] },
+    { id: "2", name: "Bob", email: "bob@example.com", subject: "Project Update", text: "The latest changes have been pushed.", date: "2026-04-09T08:15:00.000Z", read: true, labels: [] },
   ]
   return (
     <div className="rounded-lg border overflow-hidden" style={{ height: compact ? "300px" : "500px" }}>
@@ -1221,9 +1221,9 @@ function InboxPreview({ compact }: { compact: boolean }) {
 
 function MailListPreview() {
   const mails: MailItem[] = [
-    { id: "1", name: "Alice", email: "alice@example.com", subject: "Meeting Tomorrow", text: "Hey, are we still on for tomorrow?", date: "10:30 AM", read: false, labels: ["work"] },
-    { id: "2", name: "Bob", email: "bob@example.com", subject: "Project Update", text: "The latest changes have been pushed.", date: "9:15 AM", read: true, labels: [] },
-    { id: "3", name: "Charlie", email: "charlie@example.com", subject: "Code Review", text: "Can you review PR #42?", date: "Yesterday", read: true, labels: ["review"] },
+    { id: "1", name: "Alice", email: "alice@example.com", subject: "Meeting Tomorrow", text: "Hey, are we still on for tomorrow?", date: "2026-04-09T09:30:00.000Z", read: false, labels: ["work"] },
+    { id: "2", name: "Bob", email: "bob@example.com", subject: "Project Update", text: "The latest changes have been pushed.", date: "2026-04-09T08:15:00.000Z", read: true, labels: [] },
+    { id: "3", name: "Charlie", email: "charlie@example.com", subject: "Code Review", text: "Can you review PR #42?", date: "2026-04-08T14:00:00.000Z", read: true, labels: ["review"] },
   ]
   return (
     <div className="rounded-lg border overflow-hidden h-[300px]">
@@ -1239,7 +1239,7 @@ function MailDisplayPreview() {
     email: "alice@example.com",
     subject: "Meeting Tomorrow",
     text: "Hey, are we still on for tomorrow at 3pm? I wanted to discuss the new design system and how we can integrate it with our existing components.",
-    date: "10:30 AM",
+    date: "2026-04-09T09:30:00.000Z",
     read: false,
     labels: ["work"],
   }
