@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@innate/ui"
 import { ScrollArea } from "@innate/ui"
 import {
@@ -11,6 +11,7 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
+  SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -18,61 +19,32 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@innate/ui"
+import { Separator } from "@innate/ui"
 import {
-  LayoutGrid,
+  Blocks,
   Component,
   BarChart3,
-  Blocks,
-  ChevronRight,
+  LayoutGrid,
 } from "lucide-react"
+import { useEffect, useState } from "react"
+import { getComponentsByCategory, componentRegistry, type ComponentMeta } from "@/lib/registry"
+import { ComponentPreview } from "@/lib/component-preview"
+import { Button } from "@innate/ui"
+import { Badge } from "@innate/ui"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@innate/ui"
+import { Card, CardContent, CardHeader } from "@innate/ui"
+import { ScrollArea as ScrollAreaPrimitive } from "@innate/ui"
+import { Code2, Copy, Check, Sparkles, FileCode, Eye } from "lucide-react"
+
+// ── Section definitions ──────────────────────────────────────────────────────
 
 const sidebarSections = [
-  {
-    id: "blocks",
-    label: "Blocks",
-    icon: Blocks,
-    href: "/blocks",
-    items: [
-      { name: "Dashboard", href: "/blocks" },
-      { name: "Sidebar", href: "/blocks" },
-      { name: "Login", href: "/blocks" },
-      { name: "Signup", href: "/blocks" },
-      { name: "Landing", href: "/blocks" },
-      { name: "Auth", href: "/blocks" },
-      { name: "Mail", href: "/blocks" },
-      { name: "Chat", href: "/blocks" },
-    ],
-  },
-  {
-    id: "components",
-    label: "Components",
-    icon: Component,
-    href: "/components",
-    items: [
-      { name: "Layout", href: "/components" },
-      { name: "Form", href: "/components" },
-      { name: "Feedback", href: "/components" },
-      { name: "Data Display", href: "/components" },
-      { name: "Actions", href: "/components" },
-      { name: "Navigation", href: "/components" },
-    ],
-  },
-  {
-    id: "charts",
-    label: "Charts",
-    icon: BarChart3,
-    href: "/charts",
-    items: [
-      { name: "Area", href: "/charts/area" },
-      { name: "Bar", href: "/charts/bar" },
-      { name: "Line", href: "/charts/line" },
-      { name: "Pie", href: "/charts/pie" },
-      { name: "Radar", href: "/charts/radar" },
-      { name: "Radial", href: "/charts/radial" },
-      { name: "Tooltip", href: "/charts/tooltip" },
-    ],
-  },
+  { id: "blocks", label: "Blocks", icon: Blocks, href: "/blocks" },
+  { id: "components", label: "Components", icon: Component, href: "/components" },
+  { id: "charts", label: "Charts", icon: BarChart3, href: "/charts" },
 ]
+
+// ── Main Layout ──────────────────────────────────────────────────────────────
 
 export default function CatalogLayout({
   children,
@@ -81,139 +53,87 @@ export default function CatalogLayout({
 }) {
   const pathname = usePathname()
 
-  // Check which section is active
-  const activeSection = sidebarSections.find((section) =>
-    pathname?.startsWith(section.href)
-  )
-
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen">
-        {/* Main Sidebar */}
-        <Sidebar className="border-r bg-muted/30" collapsible="icon">
-          <SidebarHeader className="h-14 border-b px-4 flex items-center">
-            <Link
-              href="/"
-              className="flex items-center gap-2 font-semibold group-data-[collapsible=icon]:hidden"
-            >
-              <LayoutGrid className="h-5 w-5" />
-              <span>Catalog</span>
-            </Link>
-          </SidebarHeader>
+      <Sidebar collapsible="icon" className="border-r">
+        <SidebarHeader className="h-14 border-b px-4 flex items-center gap-2">
+          <LayoutGrid className="h-5 w-5 shrink-0" />
+          <span className="font-semibold text-sm group-data-[collapsible=icon]:hidden">
+            Layout Composer
+          </span>
+        </SidebarHeader>
 
-          <SidebarContent>
-            <ScrollArea className="h-[calc(100vh-3.5rem)]">
-              {sidebarSections.map((section) => {
-                const isActive = pathname?.startsWith(section.href)
-                const Icon = section.icon
+        <SidebarContent>
+          <ScrollArea>
+            <SidebarGroup>
+              <SidebarGroupLabel className="text-xs text-muted-foreground uppercase tracking-wider px-4 pt-4 pb-1">
+                Catalog
+              </SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {sidebarSections.map((section) => {
+                    const isActive = pathname?.startsWith(section.href)
+                    const Icon = section.icon
+                    return (
+                      <SidebarMenuItem key={section.id}>
+                        <SidebarMenuButton
+                          asChild
+                          isActive={isActive}
+                          tooltip={section.label}
+                          className="px-3 py-2"
+                        >
+                          <Link href={section.href} className="flex items-center gap-3">
+                            <Icon className="h-4 w-4 shrink-0" />
+                            <span className="group-data-[collapsible=icon]:hidden">
+                              {section.label}
+                            </span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    )
+                  })}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </ScrollArea>
+        </SidebarContent>
 
-                return (
-                  <SidebarGroup key={section.id}>
-                    <SidebarGroupLabel asChild>
-                      <Link
-                        href={section.href}
-                        className={cn(
-                          "flex items-center gap-2 text-sm font-medium",
-                          isActive && "text-primary"
-                        )}
-                      >
-                        <Icon className="h-4 w-4" />
-                        <span className="group-data-[collapsible=icon]:hidden">
-                          {section.label}
-                        </span>
-                      </Link>
-                    </SidebarGroupLabel>
+        <SidebarRail />
+      </Sidebar>
 
-                    <SidebarGroupContent className="group-data-[collapsible=icon]:hidden">
-                      <SidebarMenu>
-                        {section.items.map((item) => {
-                          const isItemActive = pathname === item.href
-                          return (
-                            <SidebarMenuItem key={item.href}>
-                              <SidebarMenuButton
-                                asChild
-                                isActive={isItemActive}
-                                tooltip={item.name}
-                              >
-                                <Link
-                                  href={item.href}
-                                  className="flex items-center gap-2 pl-8"
-                                >
-                                  <ChevronRight className="h-3 w-3" />
-                                  <span>{item.name}</span>
-                                </Link>
-                              </SidebarMenuButton>
-                            </SidebarMenuItem>
-                          )
-                        })}
-                      </SidebarMenu>
-                    </SidebarGroupContent>
-                  </SidebarGroup>
-                )
-              })}
-            </ScrollArea>
-          </SidebarContent>
-
-          <SidebarRail />
-        </Sidebar>
-
-        {/* Content Area with optional Item Sidebar */}
-        <main className="flex-1 flex min-h-screen overflow-hidden">
-          {/* Left sidebar for items within the section */}
-          <ItemSidebar section={activeSection} pathname={pathname} />
-
-          {/* Main content area */}
-          <div className="flex-1 overflow-auto">
-            <div className="container py-6">
-              <div className="flex items-center gap-2 mb-6 lg:hidden">
-                <SidebarTrigger />
-                <span className="text-sm text-muted-foreground">Menu</span>
-              </div>
-              {children}
-            </div>
-          </div>
-        </main>
-      </div>
+      {/* Main content area */}
+      <SidebarInset>
+        <header className="flex h-14 items-center gap-2 border-b px-4">
+          <SidebarTrigger className="-ml-1" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <Breadcrumb pathname={pathname} />
+        </header>
+        <div className="flex-1 overflow-auto">
+          {children}
+        </div>
+      </SidebarInset>
     </SidebarProvider>
   )
 }
 
-// Item sidebar - shows items within the current section
-function ItemSidebar({
-  section,
-  pathname,
-}: {
-  section?: (typeof sidebarSections)[number]
-  pathname: string | null
-}) {
-  if (!section) return null
+// ── Breadcrumb ───────────────────────────────────────────────────────────────
+
+function Breadcrumb({ pathname }: { pathname: string | null }) {
+  if (!pathname) return null
+
+  const parts = pathname.split("/").filter(Boolean)
+  if (parts.length === 0) return null
 
   return (
-    <div className="w-64 border-r bg-muted/20 hidden lg:block flex-shrink-0">
-      <div className="h-14 border-b px-4 flex items-center font-semibold">
-        {section.label}
-      </div>
-      <ScrollArea className="h-[calc(100vh-3.5rem)]">
-        <div className="p-2 space-y-1">
-          {section.items.map((item) => {
-            const isActive = pathname === item.href
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-                  isActive
-                    ? "bg-accent text-accent-foreground font-medium"
-                    : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
-                )}
-              >
-                {item.name}
-              </Link>
-            )
-          })}
-        </div>
-      </ScrollArea>
-    </div>
+    <nav className="flex items-center gap-1 text-sm text-muted-foreground">
+      {parts.map((part, i) => (
+        <span key={i} className="flex items-center gap-1">
+          {i > 0 && <span className="text-muted-foreground/50">/</span>}
+          <span className={i === parts.length - 1 ? "text-foreground font-medium capitalize" : "capitalize"}>
+            {part}
+          </span>
+        </span>
+      ))}
+    </nav>
   )
 }
