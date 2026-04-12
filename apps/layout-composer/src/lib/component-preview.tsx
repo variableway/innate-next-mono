@@ -1259,10 +1259,11 @@ function ChatInterfacePreview({ compact }: { compact: boolean }) {
     { id: "c1", name: "Design Team", lastMessage: "Sounds good!", lastMessageTime: "2m ago", unreadCount: 2, isGroup: true },
     { id: "c2", name: "Alice", lastMessage: "PR merged", lastMessageTime: "1h ago", unreadCount: 0 },
   ]
+  const now = new Date()
   const messages: ChatMessage[] = [
-    { id: "m1", content: "Hey team, how's the project going?", senderId: "2", timestamp: "10:00 AM" },
-    { id: "m2", content: "Going well! Almost done with the components.", senderId: "1", timestamp: "10:02 AM" },
-    { id: "m3", content: "Great to hear!", senderId: "2", timestamp: "10:03 AM" },
+    { id: "m1", content: "Hey team, how's the project going?", senderId: "2", timestamp: new Date(now.getTime() - 30 * 60 * 1000).toISOString() },
+    { id: "m2", content: "Going well! Almost done with the components.", senderId: "1", timestamp: new Date(now.getTime() - 25 * 60 * 1000).toISOString() },
+    { id: "m3", content: "Great to hear!", senderId: "2", timestamp: new Date(now.getTime() - 20 * 60 * 1000).toISOString() },
   ]
   return (
     <div className="rounded-lg border overflow-hidden" style={{ height: compact ? "300px" : "500px" }}>
@@ -1276,10 +1277,11 @@ function MessageListPreview() {
     { id: "1", name: "You", avatar: "", status: "online" },
     { id: "2", name: "Alice", avatar: "", status: "online" },
   ]
+  const now = new Date()
   const messages: ChatMessage[] = [
-    { id: "m1", content: "Hey, how's it going?", senderId: "2", timestamp: "10:00 AM" },
-    { id: "m2", content: "All good! Working on the new features.", senderId: "1", timestamp: "10:02 AM" },
-    { id: "m3", content: "Nice! Let me know if you need help.", senderId: "2", timestamp: "10:03 AM" },
+    { id: "m1", content: "Hey, how's it going?", senderId: "2", timestamp: new Date(now.getTime() - 10 * 60 * 1000).toISOString() },
+    { id: "m2", content: "All good! Working on the new features.", senderId: "1", timestamp: new Date(now.getTime() - 8 * 60 * 1000).toISOString() },
+    { id: "m3", content: "Nice! Let me know if you need help.", senderId: "2", timestamp: new Date(now.getTime() - 7 * 60 * 1000).toISOString() },
   ]
   return (
     <div className="rounded-lg border overflow-hidden h-[300px]">
