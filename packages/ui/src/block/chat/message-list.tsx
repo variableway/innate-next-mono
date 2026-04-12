@@ -53,8 +53,12 @@ function MessageList({
 
   const getUser = (id: string) => users.find((u) => u.id === id)
 
+  // Helper to check if date is valid
+  const isValidDate = (d: Date) => !isNaN(d.getTime())
+
   const formatTime = (ts: string) => {
     const d = new Date(ts)
+    if (!isValidDate(d)) return ts // Return original string if invalid date
     if (isToday(d)) return format(d, "HH:mm")
     if (isYesterday(d)) return `Yesterday ${format(d, "HH:mm")}`
     return format(d, "MMM d, HH:mm")
@@ -62,6 +66,7 @@ function MessageList({
 
   const formatDateHeader = (dateStr: string) => {
     const d = new Date(dateStr)
+    if (!isValidDate(d)) return dateStr // Return original string if invalid date
     if (isToday(d)) return "Today"
     if (isYesterday(d)) return "Yesterday"
     return format(d, "EEEE, MMMM d")
@@ -70,7 +75,18 @@ function MessageList({
   const groupByDay = (msgs: ChatMessage[]) => {
     const groups: { date: string; messages: ChatMessage[] }[] = []
     msgs.forEach((msg) => {
-      const d = format(new Date(msg.timestamp), "yyyy-MM-dd")
+      const dateObj = new Date(msg.timestamp)
+      // Skip grouping if timestamp is invalid
+      if (!isValidDate(dateObj)) {
+        const last = groups[groups.length - 1]
+        if (last && last.date === "Unknown") {
+          last.messages.push(msg)
+        } else {
+          groups.push({ date: "Unknown", messages: [msg] })
+        }
+        return
+      }
+      const d = format(dateObj, "yyyy-MM-dd")
       const last = groups[groups.length - 1]
       if (last && last.date === d) last.messages.push(msg)
       else groups.push({ date: d, messages: [msg] })
@@ -81,7 +97,13 @@ function MessageList({
   const isConsecutive = (msg: ChatMessage, idx: number, group: ChatMessage[]) => {
     if (idx === 0) return false
     const prev = group[idx - 1]
-    const diff = new Date(msg.timestamp).getTime() - new Date(prev.timestamp).getTime()
+    const msgDate = new Date(msg.timestamp)
+    const prevDate = new Date(prev.timestamp)
+    // If either date is invalid, only check sender
+    if (!isValidDate(msgDate) || !isValidDate(prevDate)) {
+      return prev.senderId === msg.senderId
+    }
+    const diff = msgDate.getTime() - prevDate.getTime()
     return prev.senderId === msg.senderId && diff < 5 * 60 * 1000
   }
 
