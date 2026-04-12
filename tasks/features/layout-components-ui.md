@@ -58,5 +58,267 @@ Here is the task:
 9. in Component Category,every Component have a AI Task Description.
 
 Let's first implement these, the main focus on this application is:
-1. for user to easy to copy and generate UI code, use can see the layout, maybe application/dashboard/pages/Components, then copy the AI description to make it in AI Agent Chat 
+1. for user to easy to copy and generate UI code, use can see the layout, maybe application/dashboard/pages/Components, then copy the AI description to make it in AI Agent Chat
 2. And also to collect UI blocks,components for further usage
+
+## Task 5 Plan: Rebuild Layout Composer from Dashboard Template
+
+> Detailed plan document: [docs/features/layout-composer-task5-plan.md](../../docs/features/layout-composer-task5-plan.md)
+
+### Context
+
+Rebuild `apps/layout-composer` based on `shadcn-dashboard-landing-template`. Users browse dashboard/app/page layouts and UI components, then copy AI task descriptions for their AI agent chats.
+
+### UI Diagrams
+
+#### Overall App Structure
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ Layout Composer App                                                        │
+│ ┌──────────┬──────────────────────────────────────────────────────────────┐ │
+│ │          │  [SiteHeader: Logo | Search | Theme Toggle | User Avatar]   │ │
+│ │          ├──────────────────────────────────────────────────────────────┤ │
+│ │          │                                                              │ │
+│ │ Sidebar │  Main Content Area                                           │ │
+│ │          │                                                              │ │
+│ │ ┌──────┐ │  (Changes based on selected route)                          │ │
+│ │ │Logo  │ │                                                              │ │
+│ │ └──────┘ │                                                              │ │
+│ │          │                                                              │ │
+│ │ DASHBOARDS│                                                             │ │
+│ │  Dashboard│                                                             │ │
+│ │  Dashboard│                                                             │ │
+│ │          │                                                              │ │
+│ │ APPS     │                                                              │ │
+│ │  Mail    │                                                              │ │
+│ │  Tasks   │                                                              │ │
+│ │  Chat    │                                                              │ │
+│ │  Calendar│                                                              │ │
+│ │  Users   │                                                              │ │
+│ │          │                                                              │ │
+│ │ PAGES    │                                                              │ │
+│ │  Auth    │                                                              │ │
+│ │  Errors  │                                                              │ │
+│ │  Settings│                                                              │ │
+│ │  FAQs    │                                                              │ │
+│ │  Pricing │                                                              │ │
+│ │          │                                                              │ │
+│ │ COMPONENTS│                                                             │ │
+│ │  All Comp│                                                              │ │
+│ │          │                                                              │ │
+│ │──────────│                                                              │ │
+│ │ [Theme]  │                                                              │ │
+│ └──────────┴──────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Sidebar Navigation
+
+```
+┌──────────────────────┐
+│  [Logo] Innate       │
+│  Layout Composer     │
+├──────────────────────┤
+│                      │
+│  DASHBOARDS          │
+│   ▸ Dashboard 1      │
+│   ▸ Dashboard 2      │
+│                      │
+│  APPS                │
+│   ▸ Mail             │
+│   ▸ Tasks            │
+│   ▸ Chat             │
+│   ▸ Calendar         │
+│   ▸ Users            │
+│                      │
+│  PAGES               │
+│   ▸ Landing Page     │
+│   ▾ Auth Pages       │
+│      Sign In 1/2/3   │
+│      Sign Up 1/2/3   │
+│      Forgot Pass 1/2 │
+│   ▾ Errors           │
+│      404/403/500     │
+│   ▾ Settings         │
+│      User/Account    │
+│      Appearance      │
+│      Notifications   │
+│   ▸ FAQs             │
+│   ▸ Pricing          │
+│                      │
+│  COMPONENTS  ← NEW   │
+│   ▸ All Components   │
+│   ▸ UI Primitives    │
+│   ▸ Blocks           │
+│   ▸ Charts           │
+│                      │
+├──────────────────────┤
+│  [Theme Customizer]  │
+│  [User Avatar]       │
+└──────────────────────┘
+```
+
+#### Dashboard Page
+
+```
+┌──────────────────────────────────────────────────────────┐
+│  Dashboard                          [AI Task] [Theme]    │
+│  Welcome to your admin dashboard                         │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐  │
+│  │ Revenue  │ │Customers │ │ Accounts │ │ Growth   │  │
+│  │ $45,231  │ │ +2,350   │ │ +12,234  │ │ +4.5%    │  │
+│  │ +20.1%   │ │ +180.1%  │ │ +19%     │ │ +10%     │  │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘  │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │ Interactive Area Chart                           │    │
+│  │  📈  [Last 3 months | Last 6 months | All time] │    │
+│  │                                                  │    │
+│  │   ╱╲    ╱╲╱╲                                    │    │
+│  │  ╱  ╲  ╱    ╲                                   │    │
+│  │ ╱    ╲╱      ╲╱╲                                │    │
+│  │______________________________________________    │    │
+│  └──────────────────────────────────────────────────┘    │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │ Data Table                        [Filter] [Sort]│    │
+│  │ Name          │ Status  │ Date       │ Amount    │    │
+│  │ Olivia Martin │ Done    │ 2024-01-15 │ $1,999    │    │
+│  │ Jackson Lee   │ Pending │ 2024-01-14 │ $39.00    │    │
+│  └──────────────────────────────────────────────────┘    │
+└──────────────────────────────────────────────────────────┘
+```
+
+#### Components Catalog Page (NEW)
+
+```
+┌──────────────────────────────────────────────────────────┐
+│  UI Components                        [AI Task] [Theme]  │
+│  Browse all available @innate/ui components              │
+│                                                          │
+│  [Filter: All | Layout | Form | Feedback | Data | ...]   │
+│  [Search...                               ]              │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  ┌────────────┐ ┌────────────┐ ┌────────────┐           │
+│  │  Button    │ │  Card      │ │  Dialog    │           │
+│  │ [Preview]  │ │ [Preview]  │ │ [Preview]  │           │
+│  │ [Code] [AI]│ │ [Code] [AI]│ │ [Code] [AI]│           │
+│  └────────────┘ └────────────┘ └────────────┘           │
+│                                                          │
+│  ┌────────────┐ ┌────────────┐ ┌────────────┐           │
+│  │  Input     │ │  Select    │ │  Table     │           │
+│  │ [Preview]  │ │ [Preview]  │ │ [Preview]  │           │
+│  │ [Code] [AI]│ │ [Code] [AI]│ │ [Code] [AI]│           │
+│  └────────────┘ └────────────┘ └────────────┘           │
+│                                                          │
+│  ... (57 components total)                               │
+└──────────────────────────────────────────────────────────┘
+```
+
+#### AI Task Description Dialog
+
+```
+┌──────────────────────────────────────────────┐
+│  AI Task Description                    [✕]  │
+├──────────────────────────────────────────────┤
+│  Page: Dashboard Layout                     │
+│  Category: Dashboard                        │
+│  Tags: dashboard, charts, table, kpi        │
+│                                              │
+│  ┌──────────────────────────────────────────┐│
+│  │ Create a dashboard page with the         ││
+│  │ following layout:                        ││
+│  │ - Top row: 4 stat cards showing key      ││
+│  │   metrics (revenue, users, orders)       ││
+│  │ - Middle: An interactive area chart      ││
+│  │ - Bottom: A sortable data table          ││
+│  │                                          ││
+│  │ Use shadcn/ui: Card, Chart, DataTable.   ││
+│  └──────────────────────────────────────────┘│
+│                                              │
+│  [Customize]          [Copy to Clipboard]    │
+│                                              │
+│  How to use:                                 │
+│  1. Copy the AI description above            │
+│  2. Paste into your AI agent chat            │
+│  3. The AI generates the layout code         │
+│  4. Refine as needed                         │
+└──────────────────────────────────────────────┘
+```
+
+#### Theme Customizer Panel
+
+```
+┌──────────────────────────────────────────────┐
+│  Theme Customizer                       [✕]  │
+├──────────────────────────────────────────────┤
+│  [Color Theme] [Layout] [Import]             │
+│                                              │
+│  Color Theme:                                │
+│  ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐        │
+│  │Def │ │Red │ │Blue│ │Grn │ │Org │  ...    │
+│  └────┘ └────┘ └────┘ └────┘ └────┘        │
+│                                              │
+│  Radius: [0] [0.3] [0.5] [0.75] [1.0]      │
+│  Mode: [Light] [Dark] [System]               │
+│                                              │
+│  Sidebar Layout:                             │
+│  Variant: [Default] [Floating] [Inset]       │
+│  Collapsible: [Off Canvas] [Icon] [None]     │
+│  Side: [Left] [Right]                        │
+└──────────────────────────────────────────────┘
+```
+
+### Implementation Plan (5 Phases)
+
+#### Phase 1: Project Shell (Core)
+1. Delete current `apps/layout-composer` content
+2. Create new project: `package.json`, `tsconfig.json`, `next.config.ts`
+3. Copy theme system from template (theme-provider, use-theme-manager)
+4. Create `app/layout.tsx` (root), `app/(dashboard)/layout.tsx` (sidebar shell)
+5. Create `app-sidebar.tsx` (4 categories: Dashboards/Apps/Pages/Components)
+6. Create `site-header.tsx`, `site-footer.tsx`
+7. All UI imports from `@innate/ui`
+
+#### Phase 2: Dashboard + Apps Pages
+1. Port `/dashboard`, `/dashboard-2` (cards, charts, data tables)
+2. Port `/apps/mail`, `/apps/chat`, `/apps/calendar`, `/apps/tasks`, `/apps/users`
+3. Replace all `@/components/ui/*` → `@innate/ui`
+
+#### Phase 3: Pages Category
+1. Auth pages (9 variants: sign-in/up/forgot-password x 3)
+2. Error pages (5 variants: 404/403/500/503/maintenance)
+3. Settings pages (6 types: account/appearance/notifications/display/profile/security)
+4. FAQs, Pricing, Landing pages
+
+#### Phase 4: Components Category (NEW)
+1. Component registry (`src/config/component-registry.ts`) with 57 components
+2. `/components` catalog page (grid + filters + search)
+3. `/components/[name]` detail page (preview + code + AI task)
+
+#### Phase 5: AI Task Description Feature
+1. `src/config/ai-descriptions.ts` (route → AI prompt mapping)
+2. `AiTaskButton` component (floating, reads route, dialog with copy)
+3. Auto-applied to all pages via dashboard layout
+
+### Key Decisions
+- **All UI from `@innate/ui`** — no local component duplicates
+- **Template pages adapted** — replace all UI imports to shared package
+- **Theme system from template** — dark/light + presets + sidebar config
+- **AI task button is floating** — reads route, no per-page changes
+- **Components catalog is new** — lists all 57 @innate/ui components
+
+### Verification
+1. `pnpm build` — compiles without errors
+2. Sidebar navigation works for all 4 categories
+3. Dashboard pages render cards, charts, tables
+4. App pages (Mail/Chat/Calendar/Tasks/Users) render layouts
+5. Auth pages display all 9 variants
+6. Component catalog grid shows all 57 components with working filters
+7. AI Task button dialog shows and copy works on every page
+8. Theme toggle (dark/light) works; theme presets change colors
+9. Sidebar collapses to icon mode correctly
