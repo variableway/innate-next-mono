@@ -1,0 +1,96 @@
+name: Update shadcn/ui Components
+
+on:
+  schedule:
+    # 每周一凌晨 2 点检查更新
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+    inputs:
+      components:
+        description: '指定更新的组件（逗号分隔），留空则检查所有'
+        required: false
+        default: ''
+
+jobs:
+  update-components:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: '10.32.1'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check for component updates
+        id: check
+        run: |
+          cd apps/web
+          # 运行 diff 检查变化
+          npx shadcn@latest diff > diff-output.txt 2>&1 || true
+          
+          if grep -q "No updates found" diff-output.txt; then
+            echo "has_updates=false" >> $GITHUB_OUTPUT
+            echo "没有检测到组件更新"
+          else
+            echo "has_updates=true" >> $GITHUB_OUTPUT
+            echo "检测到组件更新"
+            cat diff-output.txt
+          fi
+
+      - name: Update all components
+        if: steps.check.outputs.has_updates == 'true'
+        run: |
+          cd apps/web
+          # 获取所有已安装组件列表
+          COMPONENTS=$(ls components/ui/ | sed 's/\.tsx$//' | tr '\n' ' ')
+          
+          # 批量更新所有组件（覆盖模式）
+          for component in $COMPONENTS; do
+            echo "Updating $component..."
+            npx shadcn@latest add "$component" --overwrite --yes || true
+          done
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.git-check.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: update shadcn/ui components'
+          title: 'chore: 自动更新 shadcn/ui 组件'
+          body: |
+            ## 组件更新
+            
+            此 PR 由 GitHub Actions 自动生成，更新了以下 shadcn/ui 组件：
+            
+            - 运行时间：${{ github.run_id }}
+            - 触发方式：${{ github.event_name }}
+            
+            ### 检查清单
+            - [ ] 检查更新后的组件是否破坏现有功能
+            - [ ] 检查主题变量是否兼容
+            - [ ] 检查业务区块（block/）是否受影响
+            - [ ] 测试 apps/web 是否正常启动
+            
+            ### 如果不需要此次更新
+            直接关闭此 PR 即可。
+          branch: chore/update-shadcn-components
+          delete-branch: true

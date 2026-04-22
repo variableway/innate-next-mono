@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "@innate/ui/globals.css";
+
+@theme {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+}
