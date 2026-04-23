@@ -1,0 +1,3 @@
+@import "@innate/ui/globals.css";
+
+@custom-variant dark (&:is(.dark *));

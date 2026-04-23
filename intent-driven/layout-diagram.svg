@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <style>
+      .bg { fill: #fafafa; }
+      .panel { fill: #ffffff; stroke: #e4e4e7; stroke-width: 1; }
+      .header { fill: #ffffff; stroke: #e4e4e7; stroke-width: 1; }
+      .sidebar-narrow { fill: #ffffff; stroke: #e4e4e7; stroke-width: 1; }
+      .sidebar-wide { fill: #ffffff; stroke: #e4e4e7; stroke-width: 1; }
+      .content { fill: #f4f4f5; }
+      .card { fill: #ffffff; stroke: #e4e4e7; stroke-width: 1; rx: 8; }
+      .text-title { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 600; fill: #18181b; }
+      .text-label { font-family: system-ui, -apple-system, sans-serif; font-size: 11px; font-weight: 500; fill: #52525b; }
+      .text-small { font-family: system-ui, -apple-system, sans-serif; font-size: 10px; fill: #a1a1aa; }
+      .badge { fill: #f4f4f5; stroke: #e4e4e7; stroke-width: 1; rx: 4; }
+      .badge-text { font-family: system-ui, -apple-system, sans-serif; font-size: 9px; fill: #52525b; }
+      .active { fill: #f4f4f5; rx: 4; }
+      .highlight { fill: #fef3c7; stroke: #f59e0b; stroke-width: 2; rx: 4; }
+      .arrow { fill: none; stroke: #f59e0b; stroke-width: 2; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="1200" height="800" />
+
+  <!-- Layout Title -->
+  <text x="600" y="30" text-anchor="middle" class="text-title" font-size="18">Intent Driven Application Layout</text>
+
+  <!-- === MAIN LAYOUT === -->
+  <g transform="translate(50, 50)">
+    <!-- Sidebar Narrow (Icon Rail) -->
+    <rect class="sidebar-narrow" x="0" y="50" width="50" height="650" />
+    <text x="25" y="75" text-anchor="middle" class="text-label">🎯</text>
+    <text x="25" y="110" text-anchor="middle" class="text-label">➕</text>
+    <text x="25" y="660" text-anchor="middle" class="text-label">🔖</text>
+    <text x="25" y="690" text-anchor="middle" class="text-label">✉️</text>
+    <text x="25" y="45" text-anchor="middle" class="text-small" font-weight="600">ICON</text>
+    <text x="25" y="58" text-anchor="middle" class="text-small">RAIL</text>
+
+    <!-- Sidebar Wide (Navigation Panel) -->
+    <rect class="sidebar-wide" x="50" y="50" width="220" height="650" />
+    <rect class="active" x="58" y="65" width="204" height="28" />
+    <text x="70" y="83" class="text-label" font-weight="600">🏠 Feed</text>
+    <text x="70" y="115" class="text-small" font-weight="600">Superlinear AI</text>
+    <text x="70" y="140" class="text-label">📖 Knowledge Bank</text>
+    <text x="70" y="165" class="text-label" font-weight="600">📰 Deep News</text>
+    <rect class="highlight" x="58" y="150" width="204" height="24" fill="none" />
+    <text x="70" y="190" class="text-label">💡 Share Insights</text>
+    <rect class="badge" x="230" y="215" width="24" height="16" />
+    <text x="242" y="227" text-anchor="middle" class="badge-text">5</text>
+    <text x="70" y="227" class="text-label">💬 Discussion</text>
+    <text x="70" y="280" class="text-small" font-weight="600">社区公共空间</text>
+    <text x="70" y="305" class="text-label">📢 社区公告</text>
+    <rect class="badge" x="230" y="330" width="24" height="16" />
+    <text x="242" y="342" text-anchor="middle" class="badge-text">58</text>
+    <text x="70" y="342" class="text-label">👥 自我介绍</text>
+    <text x="160" y="45" text-anchor="middle" class="text-small" font-weight="600">NAVIGATION PANEL</text>
+
+    <!-- Header -->
+    <rect class="header" x="270" y="0" width="830" height="50" />
+    <text x="290" y="30" class="text-label" font-weight="600">🎓 Superlinear Academy ▼</text>
+    <rect class="active" x="460" y="10" width="60" height="30" />
+    <text x="490" y="30" text-anchor="middle" class="text-label" font-weight="600">Home</text>
+    <text x="570" y="30" text-anchor="middle" class="text-label">Learning</text>
+    <text x="660" y="30" text-anchor="middle" class="text-label">Overview</text>
+    <text x="760" y="30" text-anchor="middle" class="text-label">AI Coding</text>
+    <text x="850" y="30" text-anchor="middle" class="text-label">Events</text>
+    <text x="930" y="30" text-anchor="middle" class="text-label">🔍 Search</text>
+    <text x="990" y="30" text-anchor="middle" class="text-label">🔔</text>
+    <text x="1020" y="30" text-anchor="middle" class="text-label">💬</text>
+    <text x="1050" y="30" text-anchor="middle" class="text-label">👤 D</text>
+    <text x="685" y="12" text-anchor="middle" class="text-small" font-weight="600">HEADER</text>
+
+    <!-- Main Content Area -->
+    <rect class="content" x="270" y="50" width="830" height="650" />
+    <text x="685" y="75" text-anchor="middle" class="text-title">📰 Deep News</text>
+    <text x="980" y="75" text-anchor="end" class="text-small">Latest ▼ +5,491</text>
+
+    <!-- Card 1 -->
+    <rect class="card" x="290" y="95" width="790" height="260" />
+    <text x="310" y="125" class="text-title">Claude Dispatch 深度分析：Anthropic 的 OpenClaw 应答...</text>
+    <circle cx="325" cy="155" r="16" fill="#18181b" />
+    <text x="325" y="160" text-anchor="middle" class="text-small" fill="white">SA</text>
+    <text x="355" y="152" class="text-label" font-weight="600">Superlinear Academy</text>
+    <rect class="badge" x="490" y="142" width="40" height="18" />
+    <text x="510" y="154" text-anchor="middle" class="badge-text">Admin</text>
+    <text x="540" y="154" class="text-small">3d</text>
+    <text x="355" y="170" class="text-small">Member since January 5, 2026</text>
+    <text x="310" y="200" class="text-label" font-weight="600">Claude Dispatch 深度分析...</text>
+    <text x="310" y="225" class="text-small">调研日期：2026-03-18 触发：Anthropic 于 3 月 17 日发布 Claude Dispatch...</text>
+    <text x="310" y="260" class="text-label" fill="#52525b">See more</text>
+    <text x="310" y="330" class="text-label">❤️ 💬 👤👤👤 5 likes · 2 comments</text>
+
+    <!-- Card 2 -->
+    <rect class="card" x="290" y="375" width="790" height="260" />
+    <text x="310" y="405" class="text-title">Attention Residuals：用 Attention 修复 Transformer...</text>
+    <circle cx="325" cy="435" r="16" fill="#18181b" />
+    <text x="325" y="440" text-anchor="middle" class="text-small" fill="white">SA</text>
+    <text x="355" y="432" class="text-label" font-weight="600">Superlinear Academy</text>
+    <rect class="badge" x="490" y="422" width="40" height="18" />
+    <text x="510" y="434" text-anchor="middle" class="badge-text">Admin</text>
+    <text x="540" y="434" class="text-small">3d</text>
+    <text x="310" y="510" class="text-small">Moonshot AI 的 Kimi Team 于 2026 年 3 月 15 日发布了一篇技术报告...</text>
+    <text x="310" y="610" class="text-label">❤️ 💬 👤👤👤 3 likes · 0 comments</text>
+
+    <text x="685" y="58" text-anchor="middle" class="text-small" font-weight="600">MAIN CONTENT AREA</text>
+  </g>
+
+  <!-- === ANNOTATIONS === -->
+  <g transform="translate(50, 720)">
+    <!-- Annotation lines -->
+    <line x1="25" y1="0" x2="25" y2="20" stroke="#f59e0b" stroke-width="2" />
+    <line x1="160" y1="0" x2="160" y2="20" stroke="#f59e0b" stroke-width="2" />
+    <line x1="685" y1="0" x2="685" y2="20" stroke="#f59e0b" stroke-width="2" />
+
+    <!-- Labels -->
+    <rect class="highlight" x="5" y="25" width="140" height="50" />
+    <text x="75" y="45" text-anchor="middle" class="text-label" font-weight="600">Icon Rail (50px)</text>
+    <text x="75" y="62" text-anchor="middle" class="text-small">Fixed narrow sidebar</text>
+    <text x="75" y="76" text-anchor="middle" class="text-small">with icons</text>
+
+    <rect class="highlight" x="155" y="25" width="150" height="50" />
+    <text x="230" y="45" text-anchor="middle" class="text-label" font-weight="600">Nav Panel (220px)</text>
+    <text x="230" y="62" text-anchor="middle" class="text-small">Grouped navigation</text>
+    <text x="230" y="76" text-anchor="middle" class="text-small">with badges</text>
+
+    <rect class="highlight" x="600" y="25" width="170" height="50" />
+    <text x="685" y="45" text-anchor="middle" class="text-label" font-weight="600">Header (50px)</text>
+    <text x="685" y="62" text-anchor="middle" class="text-small">Logo + Tabs + Actions</text>
+    <text x="685" y="76" text-anchor="middle" class="text-small">Search / Notify / Avatar</text>
+  </g>
+
+  <!-- Dimensions -->
+  <text x="1150" y="400" text-anchor="middle" class="text-small" transform="rotate(90, 1150, 400)">Total Height: 700px</text>
+  <text x="600" y="785" text-anchor="middle" class="text-small">Total Width: 1100px</text>
+</svg>

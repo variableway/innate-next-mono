@@ -1,0 +1,59 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,68198,(e,t,a)=>{t.exports=e.r(33939)},63081,48410,63416,23554,21119,99671,72297,74917,e=>{"use strict";let t=[{id:"dashboard",title:"Dashboard",description:"A comprehensive dashboard layout with stats cards, charts, recent activity, and data tables. Perfect for admin panels and analytics views.",icon:"LayoutDashboard",tags:["layout","charts","stats","admin"],aiPrompt:`Create a Dashboard block with the following features:
+- Header with title, date range picker, and action buttons
+- Stats cards row (4 cards) with trend indicators
+- Main content area with:
+  - Revenue chart (area chart with multiple series)
+  - Recent transactions table (sortable, with status badges)
+- Sidebar with navigation menu
+- Use Card, Table, Badge, Button, Tabs components
+- Responsive grid layout
+- Dark mode support`},{id:"mail",title:"Mail",description:"A full-featured email interface with folder sidebar, message list, and reading pane. Supports inbox, sent, drafts, and archived folders.",icon:"Mail",tags:["email","inbox","communication"],aiPrompt:`Create a Mail block with the following features:
+- Three-panel layout: folders sidebar | message list | reading pane
+- Folders: Inbox, Drafts, Sent, Junk, Trash, Archive
+- Message list with: sender avatar, subject, preview, date, read/unread status
+- Reading pane with: header (from, to, subject, date), body, attachments
+- Compose button and search bar
+- Resizable panels using Resizable component
+- Star/unstar messages`},{id:"authentication",title:"Authentication",description:"Complete authentication flows including login, register, forgot password, and account verification. Multiple layout variations available.",icon:"Shield",tags:["auth","login","security"],aiPrompt:`Create an Authentication block with the following features:
+- Login form: email, password, remember me checkbox, submit button
+- Social login buttons: Google, GitHub
+- Link to register page
+- Register form: name, email, password, confirm password, terms checkbox
+- Forgot password flow
+- Use Form, Input, Button, Checkbox, Label, Separator components
+- Card-centered layout with logo`},{id:"tasks",title:"Tasks",description:"A Kanban-style task management board with drag-and-drop support. Organize tasks into columns like To Do, In Progress, and Done.",icon:"CheckSquare",tags:["kanban","project-management","productivity"],aiPrompt:`Create a Tasks block with the following features:
+- Kanban board with 3 columns: To Do, In Progress, Done
+- Task cards with: title, description, tags, assignee avatar, due date, priority badge
+- Drag and drop between columns
+- Add new task button with dialog form
+- Filter by assignee, priority, tag
+- Search tasks
+- Use Card, Badge, Avatar, Dialog, Input, Select, Button components`},{id:"cards",title:"Cards",description:"A collection of card component patterns for displaying content. Includes stat cards, user profile cards, pricing cards, and media cards.",icon:"CreditCard",tags:["ui","content","display"],aiPrompt:`Create a Cards block showcasing various card patterns:
+- Stat cards: large number, label, trend percentage, mini sparkline
+- User profile cards: avatar, name, role, bio, social links, follow button
+- Pricing cards: plan name, price, feature list, CTA button, highlighted popular plan
+- Media cards: image, title, description, tags, bookmark button
+- Notification cards: icon, title, message, timestamp, dismiss button
+- Use Card, Avatar, Badge, Button, Separator components`},{id:"playground",title:"Playground",description:"An interactive component playground for testing and previewing UI components. Real-time editing with live preview.",icon:"Gamepad2",tags:["demo","interactive","testing"],aiPrompt:`Create a Playground block with the following features:
+- Split view: code editor on left, live preview on right
+- Component selector dropdown (Button, Input, Card, Badge, etc.)
+- Props panel: toggle switches, select dropdowns, text inputs for component props
+- Live preview updates as props change
+- Copy code button
+- Reset to defaults button
+- Use Tabs, Select, Switch, Input, Button, Card components`},{id:"forms",title:"Forms",description:"Advanced form layouts with validation, multi-step wizards, and various input types. Built with react-hook-form and zod validation.",icon:"FileText",tags:["forms","input","validation"],aiPrompt:`Create a Forms block with the following features:
+- Multi-step form wizard with progress indicator
+- Step 1: Personal info (name, email, phone, date of birth)
+- Step 2: Address (street, city, state, zip, country)
+- Step 3: Preferences (notifications, theme, language)
+- Step 4: Review and submit
+- Validation with Zod schema
+- Error messages per field
+- Navigation between steps with back/next buttons
+- Use Form, Input, Select, Checkbox, RadioGroup, Label, Button, Progress components`},{id:"music",title:"Music",description:"A music player interface with playlist view, album art, playback controls, and volume slider. Inspired by modern streaming apps.",icon:"Music",tags:["media","player","entertainment"],aiPrompt:`Create a Music block with the following features:
+- Now playing bar: album art, song title, artist, playback controls (play/pause, next, prev), progress bar, volume slider
+- Playlist sidebar: song list with album art, title, artist, duration
+- Album grid view: cover art, album name, artist
+- Player controls: shuffle, repeat, like button
+- Use Slider, Button, Avatar, Card, ScrollArea, Separator components
+- Dark theme optimized`}];e.s(["blocksData",0,t,"getBlockById",0,function(e){return t.find(t=>t.id===e)}],63081);var a=e.i(66029);let i=(0,a.default)("layout-dashboard",[["rect",{width:"7",height:"9",x:"3",y:"3",rx:"1",key:"10lvy0"}],["rect",{width:"7",height:"5",x:"14",y:"3",rx:"1",key:"16une8"}],["rect",{width:"7",height:"9",x:"14",y:"12",rx:"1",key:"1hutg5"}],["rect",{width:"7",height:"5",x:"3",y:"16",rx:"1",key:"ldoo1y"}]]);e.s(["LayoutDashboard",0,i],48410);let s=(0,a.default)("shield",[["path",{d:"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",key:"oel41y"}]]);e.s(["Shield",0,s],63416);let r=(0,a.default)("square-check-big",[["path",{d:"M21 10.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.5",key:"1uzm8b"}],["path",{d:"m9 11 3 3L22 4",key:"1pflzl"}]]);e.s(["CheckSquare",0,r],23554);let o=(0,a.default)("credit-card",[["rect",{width:"20",height:"14",x:"2",y:"5",rx:"2",key:"ynyp8z"}],["line",{x1:"2",x2:"22",y1:"10",y2:"10",key:"1b3vmo"}]]);e.s(["CreditCard",0,o],21119);let n=(0,a.default)("gamepad-2",[["line",{x1:"6",x2:"10",y1:"11",y2:"11",key:"1gktln"}],["line",{x1:"8",x2:"8",y1:"9",y2:"13",key:"qnk9ow"}],["line",{x1:"15",x2:"15.01",y1:"12",y2:"12",key:"krot7o"}],["line",{x1:"18",x2:"18.01",y1:"10",y2:"10",key:"1lcuu1"}],["path",{d:"M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z",key:"mfqc10"}]]);e.s(["Gamepad2",0,n],99671);let l=(0,a.default)("file-text",[["path",{d:"M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z",key:"1rqfz7"}],["path",{d:"M14 2v4a2 2 0 0 0 2 2h4",key:"tnqrlb"}],["path",{d:"M10 9H8",key:"b1mrlr"}],["path",{d:"M16 13H8",key:"t4e002"}],["path",{d:"M16 17H8",key:"z1uh3a"}]]);e.s(["FileText",0,l],72297);let d=(0,a.default)("music",[["path",{d:"M9 18V5l12-2v13",key:"1jmyc2"}],["circle",{cx:"6",cy:"18",r:"3",key:"fqmcym"}],["circle",{cx:"18",cy:"16",r:"3",key:"1hluhg"}]]);e.s(["Music",0,d],74917)},43194,e=>{"use strict";var t=e.i(78475),a=e.i(68198),i=e.i(66368),s=e.i(63081);e.i(16233);var r=e.i(76075),o=e.i(23490),n=e.i(35893),l=e.i(14877),d=e.i(87352),c=e.i(48410),m=e.i(99348),p=e.i(63416),h=e.i(23554),u=e.i(21119),g=e.i(99671),x=e.i(72297),b=e.i(74917),y=e.i(27999),w=e.i(16184),f=e.i(19291),k=e.i(16714),k=k;let v=(0,e.i(66029).default)("sparkles",[["path",{d:"M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",key:"4pj2yx"}],["path",{d:"M20 3v4",key:"1olli1"}],["path",{d:"M22 5h-4",key:"1gvqau"}],["path",{d:"M4 17v2",key:"vumght"}],["path",{d:"M5 18H3",key:"zchphs"}]]),C={LayoutDashboard:(0,t.jsx)(c.LayoutDashboard,{className:"w-8 h-8"}),Mail:(0,t.jsx)(m.Mail,{className:"w-8 h-8"}),Shield:(0,t.jsx)(p.Shield,{className:"w-8 h-8"}),CheckSquare:(0,t.jsx)(h.CheckSquare,{className:"w-8 h-8"}),CreditCard:(0,t.jsx)(u.CreditCard,{className:"w-8 h-8"}),Gamepad2:(0,t.jsx)(g.Gamepad2,{className:"w-8 h-8"}),FileText:(0,t.jsx)(x.FileText,{className:"w-8 h-8"}),Music:(0,t.jsx)(b.Music,{className:"w-8 h-8"})};e.s(["default",0,function(){let e=(0,a.useParams)(),c=(0,s.getBlockById)(e.id),[m,p]=(0,i.useState)(!1);if(!c)return(0,t.jsxs)("div",{className:"max-w-3xl mx-auto px-4 py-12 text-center",children:[(0,t.jsx)(y.Blocks,{className:"w-12 h-12 text-muted-foreground mx-auto mb-4"}),(0,t.jsx)("h1",{className:"text-xl font-semibold mb-2",children:"Block not found"}),(0,t.jsx)("p",{className:"text-muted-foreground",children:"The block you are looking for does not exist."})]});let h=async()=>{await navigator.clipboard.writeText(c.aiPrompt),p(!0),setTimeout(()=>p(!1),2e3)};return(0,t.jsxs)("div",{className:"max-w-3xl mx-auto px-4 py-6",children:[(0,t.jsxs)(n.Button,{variant:"ghost",size:"sm",className:"mb-4 -ml-2 text-muted-foreground",onClick:()=>window.history.back(),children:[(0,t.jsx)(w.ArrowLeft,{className:"w-4 h-4 mr-1"}),"Back to Blocks"]}),(0,t.jsxs)("div",{className:"flex items-start gap-4 mb-6",children:[(0,t.jsx)("div",{className:"p-3 rounded-xl bg-primary/10 text-primary shrink-0",children:C[c.icon]||(0,t.jsx)(y.Blocks,{className:"w-8 h-8"})}),(0,t.jsxs)("div",{className:"flex-1 min-w-0",children:[(0,t.jsx)("h1",{className:"text-2xl font-semibold",children:c.title}),(0,t.jsx)("p",{className:"text-muted-foreground mt-1",children:c.description}),(0,t.jsx)("div",{className:"flex flex-wrap gap-1.5 mt-3",children:c.tags.map(e=>(0,t.jsx)(o.Badge,{variant:"secondary",className:"text-xs",children:e},e))})]})]}),(0,t.jsx)(d.Separator,{className:"mb-6"}),(0,t.jsxs)(r.Card,{children:[(0,t.jsxs)(r.CardHeader,{className:"pb-3",children:[(0,t.jsxs)("div",{className:"flex items-center justify-between",children:[(0,t.jsxs)("div",{className:"flex items-center gap-2",children:[(0,t.jsx)(v,{className:"w-5 h-5 text-primary"}),(0,t.jsx)(r.CardTitle,{className:"text-base",children:"AI Prompt"})]}),(0,t.jsx)(n.Button,{size:"sm",variant:"outline",onClick:h,className:"gap-1.5",children:m?(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(k.default,{className:"w-3.5 h-3.5"}),"Copied"]}):(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(f.Copy,{className:"w-3.5 h-3.5"}),"Copy Prompt"]})})]}),(0,t.jsxs)(r.CardDescription,{children:["Copy this prompt to generate the ",c.title," block with AI"]})]}),(0,t.jsx)(r.CardContent,{children:(0,t.jsx)(l.Textarea,{value:c.aiPrompt,readOnly:!0,className:"min-h-[300px] font-mono text-sm resize-none bg-muted/50"})})]})]})}],43194)}]);
