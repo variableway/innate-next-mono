@@ -61,3 +61,28 @@ description: Use for any interaction with @21st-sdk packages or 21st Agents. If 
 admin-ui的优势在哪里，是否可以变成一种针对独立场景的框架
 
 请写入framework 对比报告中。
+
+## Task 6: 升级UI组件方案
+
+1. 按照intent-driven/shadcn-v4-upgrade-analysis.md， 执行UI创建方案
+```
+  最小启动方案（1 天）
+   步骤   内容                                时间
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   1      创建 components.json                10 分钟
+   2      添加 @theme inline 到 globals.css   30 分钟
+   3      为 57 个组件添加版本标记            1 小时
+   4      创建同步脚本                        2 小时
+   5      验证构建                            30 分钟
+  ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  输出文件
+  📄 intent-driven/shadcn-v4-upgrade-analysis.md — 完整分析（含升级路径、持续更新策略、快速启动方案）
+  ```
+  2. 同时添加theme change 功能 到intend-driven应用中去
+
+## Task 7:  请修复UI问题
+
+1.修复这个截图的UI问题 ![alt text](<截屏2026-04-24 14.42.34.png>)
+2.THEME切换，是否可以添加成主题切换呢？似乎我更想要的是主题切换
+
+## Task 8: 

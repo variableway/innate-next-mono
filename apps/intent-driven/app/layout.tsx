@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppLayout } from "@/components/layout/app-layout";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeStyleProvider } from "@/components/theme-style-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,10 +27,33 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var style = localStorage.getItem('innate-theme-style');
+                if (style && ['vega','nova','sera'].includes(style)) {
+                  document.documentElement.classList.add('style-' + style);
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AppLayout>{children}</AppLayout>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ThemeStyleProvider>
+            <AppLayout>{children}</AppLayout>
+          </ThemeStyleProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

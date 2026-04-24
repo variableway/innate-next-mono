@@ -1,3 +1,8 @@
+// @shadcn-version: 2.3.0
+// @last-sync: 2026-04-23
+// @upstream: https://github.com/shadcn-ui/ui
+// @custom-modifications: none
+
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 

@@ -1,3 +1,8 @@
+// @shadcn-version: 2.3.0
+// @last-sync: 2026-04-23
+// @upstream: https://github.com/shadcn-ui/ui
+// @custom-modifications: none
+
 'use client'
 
 import { useMemo } from 'react'

@@ -1,9 +1,18 @@
 "use client";
 
 import { cn } from "@innate/ui";
-import { Search, Bell, MessageSquare, Bookmark, ChevronDown } from "lucide-react";
+import { Search, Bell, MessageSquare, Bookmark, ChevronDown, LogOut, Settings, User } from "lucide-react";
+import { ThemeStyleSwitcher } from "@/components/theme-style-switcher";
 import { Input } from "@innate/ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@innate/ui";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@innate/ui";
 
 export interface HeaderNavItem {
   label: string;
@@ -25,8 +34,16 @@ export const headerActions = {
   notifications: { hasUnread: true },
   messages: { enabled: true },
   bookmarks: { enabled: true },
-  user: { initials: "D", fallback: "D" },
 } as const;
+
+// ===== DATA: User profile =====
+export const userProfile = {
+  name: "Developer",
+  email: "dev@innate.app",
+  role: "Admin",
+  avatar: "",
+  initials: "D",
+};
 
 export function Header() {
   return (
@@ -92,13 +109,48 @@ export function Header() {
           </button>
         )}
 
-        {/* User avatar */}
-        <Avatar className="w-8 h-8 cursor-pointer">
-          <AvatarImage src="" />
-          <AvatarFallback className="bg-primary text-primary-foreground text-xs">
-            {headerActions.user.initials}
-          </AvatarFallback>
-        </Avatar>
+        {/* Theme Style Switcher */}
+        <ThemeStyleSwitcher />
+
+        {/* User profile dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="flex items-center gap-2 pl-1 pr-2 py-1 rounded-md hover:bg-accent transition-colors">
+              <Avatar className="w-7 h-7">
+                <AvatarImage src={userProfile.avatar} />
+                <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                  {userProfile.initials}
+                </AvatarFallback>
+              </Avatar>
+              <div className="hidden sm:flex flex-col items-start leading-none">
+                <span className="text-sm font-medium">{userProfile.name}</span>
+                <span className="text-xs text-muted-foreground">{userProfile.role}</span>
+              </div>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuLabel className="font-normal">
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium">{userProfile.name}</p>
+                <p className="text-xs text-muted-foreground">{userProfile.email}</p>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <User className="mr-2 h-4 w-4" />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Settings className="mr-2 h-4 w-4" />
+              Settings
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="text-destructive focus:text-destructive">
+              <LogOut className="mr-2 h-4 w-4" />
+              Log out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
