@@ -52,3 +52,12 @@ description: Use for any interaction with @21st-sdk packages or 21st Agents. If 
 
 1. [admin-ui](../../references/admin-ui)是代码
 2. 按照这个代码方式，以及使用的框架，确认是否可以和nextjs同时运行？给一个可行性报告。
+
+## Task 5: admin-ui和当前nextjs 框架使用场景对比
+
+1. 对比目前admin-ui和nextjs 框架使用场景分析，确认不同的框架适合的场景
+2. 如何共享ui，这个可能是可以实现的，需要分析可行性
+3. 如何把admin-ui代码中可能使用的组件，抽取出来和ui分离的一个框架，或者就是变成一个admin starter也可以，分析
+admin-ui的优势在哪里，是否可以变成一种针对独立场景的框架
+
+请写入framework 对比报告中。
